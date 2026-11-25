@@ -1,0 +1,10 @@
+[
+  {
+    "Image": "C:\\Program Files\\CrowdStrike\\CSFalconService.exe",
+    "CommandLine": "CSFalconService.exe --scan lsass"
+  },
+  {
+    "Image": "C:\\Windows\\System32\\notepad.exe",
+    "CommandLine": "notepad.exe notes.txt"
+  }
+]

@@ -1,0 +1,1 @@
+(Image IN ("*\\procdump.exe", "*\\procdump64.exe") CommandLine="*lsass*") OR (Image="*\\rundll32.exe" CommandLine="*comsvcs*" CommandLine="*MiniDump*") NOT (Image IN ("C:\\Program Files\\CrowdStrike\\*", "C:\\Program Files\\Microsoft Security Client\\*"))

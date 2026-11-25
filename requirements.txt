@@ -1,0 +1,8 @@
+sigma-cli>=1.0.0
+pysigma-backend-splunk
+pysigma-backend-elasticsearch
+pysigma-pipeline-windows
+pysigma-pipeline-sysmon
+pytest>=7.0.0
+pyyaml>=6.0
+evtx>=0.8.0

@@ -1,0 +1,10 @@
+[
+  {
+    "Image": "C:\\Temp\\procdump64.exe",
+    "CommandLine": "procdump64.exe -accepteula -ma lsass.exe C:\\Temp\\lsass.dmp"
+  },
+  {
+    "Image": "C:\\Windows\\System32\\rundll32.exe",
+    "CommandLine": "rundll32.exe C:\\Windows\\System32\\comsvcs.dll, MiniDump 684 C:\\Temp\\lsass.dmp full"
+  }
+]

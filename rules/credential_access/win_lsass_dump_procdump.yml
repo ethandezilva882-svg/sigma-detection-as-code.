@@ -1,0 +1,29 @@
+title: LSASS Memory Dumping via Procdump or Comsvcs
+id: 5f3e9b1d-2a8c-4e6f-9b1a-8c7d6e5f4a3b
+status: test
+description: Detects process creation targeting LSASS via procdump or rundll32 with comsvcs.dll MiniDump.
+tags:
+    - attack.credential-access
+    - attack.t1003.001
+logsource:
+    category: process_creation
+    product: windows
+detection:
+    selection_procdump:
+        Image|endswith:
+            - '\procdump.exe'
+            - '\procdump64.exe'
+        CommandLine|contains: 'lsass'
+    selection_comsvcs:
+        Image|endswith: '\rundll32.exe'
+        CommandLine|contains|all:
+            - 'comsvcs'
+            - 'MiniDump'
+    filter_edr:
+        Image|startswith:
+            - 'C:\Program Files\CrowdStrike\'
+            - 'C:\Program Files\Microsoft Security Client\'
+    condition: (selection_procdump or selection_comsvcs) and not filter_edr
+falsepositives:
+    - Authorized admin diagnostics or memory debugging.
+level: high
