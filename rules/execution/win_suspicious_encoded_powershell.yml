@@ -1,0 +1,35 @@
+title: Suspicious Encoded PowerShell Command Execution
+id: c2a4b6e8-1d3f-5a7b-9c1e-3f5a7b9c1e3f
+status: test
+description: Detects execution of PowerShell processes leveraging encoded commands combined with hidden window styles and non-standard network subnets.
+references:
+    - https://attack.mitre.org/techniques/T1059/001/
+author: Detection Engineering Team
+date: 2024/01/15
+tags:
+    - attack.execution
+    - attack.t1059.001
+logsource:
+    category: process_creation
+    product: windows
+detection:
+    selection_img:
+        Image|endswith:
+            - '\powershell.exe'
+            - '\pwsh.exe'
+    selection_flags:
+        CommandLine|contains:
+            - ' -e '
+            - ' -encodedcommand '
+            - ' -enc '
+    selection_window:
+        CommandLine|contains:
+            - ' -w hidden '
+            - ' -windowstyle hidden '
+    filter_management_subnets:
+        SourceIp|cidr:
+            - '10.0.50.0/24'
+    condition: selection_img and selection_flags and selection_window and not filter_management_subnets
+falsepositives:
+    - Automated administrative deployment scripts executed via centralized management servers.
+level: medium
